@@ -17,6 +17,7 @@ void buscarTareaID(struct Tarea **tareasPedientes, struct Tarea **tareasRelizada
 
 int main(int argc, char const *argv[]) {
     int cantTareas;
+    printf("hola");
     struct Tarea **tareasPendientes;
     struct Tarea **tareasRealizadas;
 
