@@ -7,6 +7,7 @@ struct Tarea {
     char *Descripcion;
     int Duracion;  // entre 10 – 100
 };
+// declaracion de funciones
 void inicializarTareas(struct Tarea **tareas, int cantTareas);
 void ingresarTareas(struct Tarea **tareas, int cantTareas);
 void mostrarTotal(struct Tarea **tareas, int cantTareas);
