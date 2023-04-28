@@ -13,6 +13,8 @@ void mostrarTotal(struct Tarea **tareas, int cantTareas);
 void mostrarPendientes(struct Tarea **tareas, int cantTareas);
 void mostrarRealizadas(struct Tarea **tareas, int cantTareas);
 void controlTareasRealizadas(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas);
+void buscarTareaPalabra(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas);
+
 int main(int argc, char const *argv[]) {
     int cantTareas;
     struct Tarea **tareasPendientes;
@@ -35,40 +37,8 @@ int main(int argc, char const *argv[]) {
     mostrarRealizadas(tareasRealizadas, cantTareas);
     mostrarPendientes(tareasPendientes, cantTareas);
 
-    // Preguntar si la tarea se ha completado
-    printf("Ha completado esta tarea (s/n): ");
-    scanf("%s", respuesta);
-
-    if (respuesta[0] == 's' || respuesta[0] == 'S') {
-        // Mover tarea a tareas realizadas
-        tareas[i]->completada = 1;
-        // Imprimir mensaje de confirmación
-        printf("La tarea '%s' ha sido completada.\n", tareas[i]->Descripcion);
-    }
-    if (respuesta[0] == 'n' || respuesta[0] == 'N') {
-        // Mover tarea a tareas realizadas
-        tareas[i]->pendiente = 1;
-        // Imprimir mensaje de confirmación
-        printf("La tarea '%s' ha sido completada.\n", tareas[i]->Descripcion);
-    }
-}
-
-printf("\nTareas realizadas:\n");
-for (int i = 0; i < cantTareas; i++) {
-    if (tareas[i]->completada) {
-        printf("%d. %s\n", i + 1, tareas[i]->Descripcion);
-    } else {
-        printf("%d. %s\n", i + 1, tareas[i]->Descripcion);
-    }
-}
-
-for (int i = 0; i < cantTareas; i++) {
-    free(tareas[i]->Descripcion);
-    free(tareas[i]);
-}
-free(tareas);
-
-return 0;
+    buscarTareaPalabra(tareasPendientes, tareasRealizadas, cantTareas);
+    return 0;
 }
 
 void inicializarTareas(struct Tarea **tareas, int cantTareas) {
@@ -153,11 +123,6 @@ void controlTareasRealizadas(struct Tarea **tareasPendientes, struct Tarea **tar
             // Imprimir mensaje de confirmación
             printf("\nLa tarea '%d' ha sido completada.\n", tareasPendientes[i]->TareaID);
             tareasPendientes[i] = NULL;
-        } else if (respuesta[0] == 'n' || respuesta[0] == 'N') {
-            // Mover tarea a tareas realizadas
-            tareasPendientes[i] = tareasPendientes[i];
-            // Imprimir mensaje de confirmación
-            printf("La tarea '%d' no ha sido completada.\n", tareasPendientes[i]->TareaID);
         }
     }
 }
