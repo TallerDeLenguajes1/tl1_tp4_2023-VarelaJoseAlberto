@@ -13,11 +13,10 @@ void mostrarTotal(struct Tarea **tareas, int cantTareas);
 void mostrarPendientes(struct Tarea **tareas, int cantTareas);
 void mostrarRealizadas(struct Tarea **tareas, int cantTareas);
 void controlTareasRealizadas(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas);
-void buscarTareaPalabra(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas);
+void buscarTareaID(struct Tarea **tareasPedientes, struct Tarea **tareasRelizadas, int cantTareas);
 
 int main(int argc, char const *argv[]) {
     int cantTareas;
-    printf("hola");
     struct Tarea **tareasPendientes;
     struct Tarea **tareasRealizadas;
 
@@ -38,7 +37,8 @@ int main(int argc, char const *argv[]) {
     mostrarRealizadas(tareasRealizadas, cantTareas);
     mostrarPendientes(tareasPendientes, cantTareas);
 
-    buscarTareaPalabra(tareasPendientes, tareasRealizadas, cantTareas);
+    buscarTareaID(tareasPendientes, tareasRealizadas, cantTareas);
+
     return 0;
 }
 
@@ -128,15 +128,15 @@ void controlTareasRealizadas(struct Tarea **tareasPendientes, struct Tarea **tar
     }
 }
 
-void buscarTareaPalabra(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas) {
-    char aux[35];
+void buscarTareaID(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas) {
+    int id;
     printf("Ingrese el id de la tareas a buscar: ");
     fflush(stdin);
-    gets(aux);
+    scanf("%d", &id);
 
     for (int i = 0; i < cantTareas; i++) {
         if (tareasPendientes[i] != NULL) {
-            if (strstr(tareasPendientes[i]->Descripcion, aux)) {
+            if (id == tareasPendientes[i]->TareaID) {
                 printf("---Tarea encontrada---\n");
                 printf("Descripcion: %s\n", tareasPendientes[i]->Descripcion);
                 printf("Duracion: %d\n", tareasPendientes[i]->Duracion);
@@ -144,7 +144,7 @@ void buscarTareaPalabra(struct Tarea **tareasPendientes, struct Tarea **tareasRe
             }
         }
         if (tareasRealizadas[i] != NULL) {
-            if (strstr(tareasRealizadas[i]->Descripcion, aux)) {
+            if (id == tareasRealizadas[i]->TareaID) {
                 printf("Tarea encontrada---\n");
                 printf("Descripcion: %s\n", tareasRealizadas[i]->Descripcion);
                 printf("Duracion: %d\n", tareasRealizadas[i]->Duracion);
