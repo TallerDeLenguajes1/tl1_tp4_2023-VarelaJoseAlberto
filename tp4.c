@@ -13,6 +13,7 @@ void mostrarTotal(struct Tarea **tareas, int cantTareas);
 void mostrarPendientes(struct Tarea **tareas, int cantTareas);
 void mostrarRealizadas(struct Tarea **tareas, int cantTareas);
 void controlTareasRealizadas(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas);
+void buscarTareaPalabra(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas);
 
 int main(int argc, char const *argv[]) {
     int cantTareas;
@@ -35,6 +36,8 @@ int main(int argc, char const *argv[]) {
 
     mostrarRealizadas(tareasRealizadas, cantTareas);
     mostrarPendientes(tareasPendientes, cantTareas);
+
+    buscarTareaPalabra(tareasPendientes, tareasRealizadas, cantTareas);
     return 0;
 }
 
@@ -120,6 +123,32 @@ void controlTareasRealizadas(struct Tarea **tareasPendientes, struct Tarea **tar
             // Imprimir mensaje de confirmación
             printf("\nLa tarea '%d' ha sido completada.\n", tareasPendientes[i]->TareaID);
             tareasPendientes[i] = NULL;
+        }
+    }
+}
+
+void buscarTareaPalabra(struct Tarea **tareasPendientes, struct Tarea **tareasRealizadas, int cantTareas) {
+    char aux[35];
+    printf("Ingrese el id de la tareas a buscar: ");
+    fflush(stdin);
+    gets(aux);
+
+    for (int i = 0; i < cantTareas; i++) {
+        if (tareasPendientes[i] != NULL) {
+            if (strstr(tareasPendientes[i]->Descripcion, aux)) {
+                printf("---Tarea encontrada---\n");
+                printf("Descripcion: %s\n", tareasPendientes[i]->Descripcion);
+                printf("Duracion: %d\n", tareasPendientes[i]->Duracion);
+                printf("Estado de la tarea encontrada: PENDIENTE\n");
+            }
+        }
+        if (tareasRealizadas[i] != NULL) {
+            if (strstr(tareasRealizadas[i]->Descripcion, aux)) {
+                printf("Tarea encontrada---\n");
+                printf("Descripcion: %s\n", tareasRealizadas[i]->Descripcion);
+                printf("Duracion: %d\n", tareasRealizadas[i]->Duracion);
+                printf("Estado de la tarea encontrada: REALIZADA\n");
+            }
         }
     }
 }
