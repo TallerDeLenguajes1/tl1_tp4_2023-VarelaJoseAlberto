@@ -7,6 +7,12 @@ struct Tarea {
     char *Descripcion;
     int Duracion;  // entre 10 – 100
 };
+
+struct Nodo {
+    struct Tarea tarea;
+    struct Nodo *Siguiente;
+};
+
 void inicializarTareas(struct Tarea **tareas, int cantTareas);
 void ingresarTareas(struct Tarea **tareas, int cantTareas);
 void mostrarTotal(struct Tarea **tareas, int cantTareas);
